@@ -1,9 +1,21 @@
 {.compile("webview.cc","-std=c++11").}
 {.passC: "-I" & currentSourcePath().substr(0, high(currentSourcePath()) - 4) .}
+{.passL: "-lstdc++".}
 
-when defined(macosx):
-    {.passL: "-lstdc++ -framework WebKit".}
+when defined(linux):
+    {.passC: "-DWEBVIEW_GTK=1 " &
+             staticExec"pkg-config --cflags gtk+-3.0 webkit2gtk-4.0".}
+    {.passL: staticExec"pkg-config --libs gtk+-3.0 webkit2gtk-4.0".}
+elif defined(freebsd):
+    {.passC: "-DWEBVIEW_GTK=1 " &
+             staticExec"pkg-config --cflags gtk3 webkit2-gtk3".}
+    {.passL: staticExec"pkg-config --libs gtk3 webkit2-gtk3".}
+elif defined(macosx):
     {.passC: "-DWEBVIEW_COCOA=1".}
+    {.passL: "-framework WebKit".}
+elif defined(windows):
+    {.passC: "-DWEBVIEW_EDGE=1".}
+    {.passL: "-mwindows -L./dll/x64 -lwebview -lWebView2Loader".}
     
 type
     webview_t {.header: "webview.h", importc.} = pointer
