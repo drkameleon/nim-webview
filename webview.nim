@@ -1,9 +1,9 @@
+{.compile("webview.cc","-std=c++11").}
+
 {.passC: "-I" & currentSourcePath().substr(0, high(currentSourcePath()) - 4) .}
 
 when defined(macosx):
-    #{.compile("webview.cc","-DWEBVIEW_COCOA=1 -DOBJC_OLD_DISPATCH_PROTOTYPES=1 -std=c++11 -framework WebKit").}
-
-    {.passL: "-L. -lwebview.o -lstdc++ -framework WebKit".}
+    {.passL: "-lstdc++ -framework WebKit".}
     {.passC: "-DWEBVIEW_HEADER=1 -DWEBVIEW_COCOA=1".}
     
 
