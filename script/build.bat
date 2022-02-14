@@ -17,4 +17,4 @@ if not exist "%vc_dir%\Common7\Tools\vsdevcmd.bat" (
 )
 echo Found %vc_dir%
 
-call "%vc_dir%\Common7\Tools\vsdevcmd.bat" -arch=x86 -host_arch=x64
+call "%vc_dir%\Common7\Tools\vsdevcmd.bat" -arch=x86 -host_arch=x64 
