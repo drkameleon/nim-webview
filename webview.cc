@@ -1,12 +1,3 @@
-// Linux
-// CPPFLAGS="`pkg-config --cflags --libs gtk+-3.0 webkit2gtk-4.0` -lstdc++"
-// MacOS
-// CPPFLAGS="-std=c++11 -framework WebKit"
-// Windows (x64)
-// CPPFLAGS="-mwindows -L./dll/x64 -lwebview -lWebView2Loader"
-//
-// g++ -c -std=c++11 -framework WebKit webview.cc -o webview.o
-
 /*
  * MIT License
  *
@@ -30,8 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef WEBVIEW_H
-#define WEBVIEW_H
+// COMPILATION FLAGS:
+
+// Linux
+// CPPFLAGS="`pkg-config --cflags --libs gtk+-3.0 webkit2gtk-4.0` -lstdc++"
+// MacOS
+// CPPFLAGS="-std=c++11 -framework WebKit"
+// Windows (x64)
+// CPPFLAGS="-mwindows -L./dll/x64 -lwebview -lWebView2Loader"
+//
 
 #ifndef WEBVIEW_API
 #define WEBVIEW_API extern
@@ -1370,5 +1368,3 @@ WEBVIEW_API void webview_return(webview_t w, const char *seq, int status,
                                 const char *result) {
   static_cast<webview::webview *>(w)->resolve(seq, status, result);
 }
-
-#endif /* WEBVIEW_H */
