@@ -39,8 +39,9 @@ jobs:
       - name: Install dependencies + Build Library
         shell: msys2 {0}
         run: |
+          ./script/build.bat
           pacman --noconfirm -S p7zip
-          pacman --noconfirm -S mingw-w64-x86_64-clang
+          pacman --noconfirm -S mingw-w64-x86_64-gcc
           pacman --noconfirm -S mingw-w64-x86_64-winstorecompat-git
           mkdir dist
           mkdir nim
