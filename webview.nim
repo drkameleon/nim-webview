@@ -31,7 +31,7 @@ elif defined(macosx):
     {.passC: "-DWEBVIEW_COCOA=1".}
     {.passL: "-framework WebKit".}
 elif defined(windows):
-    {.compile("webview.cc","-std=c++17").}
+    {.compile("webview.cc","/std:c++17").}
     {.passC: "-DWEBVIEW_EDGE=1".}
     {.passL: "-mwindows -L./dll/x64 -lwebview -lWebView2Loader".}
 
