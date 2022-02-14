@@ -13,22 +13,25 @@
 # Compilation & Linking
 #=======================================
 
-{.compile("webview.cc","-std=c++11").}
 {.passC: "-I" & currentSourcePath().substr(0, high(currentSourcePath()) - 4) .}
 {.passL: "-lstdc++".}
 
 when defined(linux):
+    {.compile("webview.cc","-std=c++11").}
     {.passC: "-DWEBVIEW_GTK=1 " &
              staticExec"pkg-config --cflags gtk+-3.0 webkit2gtk-4.0".}
     {.passL: staticExec"pkg-config --libs gtk+-3.0 webkit2gtk-4.0".}
 elif defined(freebsd):
+    {.compile("webview.cc","-std=c++11").}
     {.passC: "-DWEBVIEW_GTK=1 " &
              staticExec"pkg-config --cflags gtk3 webkit2-gtk3".}
     {.passL: staticExec"pkg-config --libs gtk3 webkit2-gtk3".}
 elif defined(macosx):
+    {.compile("webview.cc","-std=c++11").}
     {.passC: "-DWEBVIEW_COCOA=1".}
     {.passL: "-framework WebKit".}
 elif defined(windows):
+    {.compile("webview.cc","-std=c++17").}
     {.passC: "-DWEBVIEW_EDGE=1".}
     {.passL: "-mwindows -L./dll/x64 -lwebview -lWebView2Loader".}
 
