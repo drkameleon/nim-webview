@@ -835,7 +835,7 @@ using browser_engine = cocoa_wkwebview_engine;
 #pragma comment(lib, "windowsapp")
 
 // Edge/Chromium headers and libs
-#include "webview2.h"
+#include "script/WebView2.h"
 #pragma comment(lib, "ole32.lib")
 #pragma comment(lib, "oleaut32.lib")
 
