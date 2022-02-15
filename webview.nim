@@ -31,9 +31,9 @@ elif defined(macosx):
     {.passC: "-DWEBVIEW_COCOA=1".}
     {.passL: "-framework WebKit".}
 elif defined(windows):
-    {.compile("webview.cc","/std:c++17").}
+    {.compile("webview.cc","""-std=c++11 -I"C:/Program Files (x86)/Windows Kits/10/Include/10.0.20348.0/cppwinrt" -I"C:/Program Files (x86)/Windows Kits/10/Include/10.0.20348.0/ucrt" -I"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.29.30133/include"""").}
     {.passC: "-DWEBVIEW_EDGE=1".}
-    {.passL: "-mwindows dll/x64/lwebview.dll dll/x64/WebView2Loader.dll".}
+    {.passL: "-mwindows -L./dll/x64 -lwebview -lWebView2Loader".}
 
 #=======================================
 # Types
