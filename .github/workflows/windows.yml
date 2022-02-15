@@ -31,8 +31,8 @@ jobs:
         with:
           submodules: recursive
 
-      - name: "Build Webview"
-        run: ./script/build.bat
+      # - name: "Build Webview"
+      #   run: ./script/build.bat
 
       - uses: msys2/setup-msys2@v2
         with:
