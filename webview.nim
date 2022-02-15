@@ -59,8 +59,8 @@ when not defined(WEBVIEW_NOEDGE):
         Webview* {.header: webviewHeader, importc: "webview_t".} = pointer
 else:
     type
-        WebviewPrivObj  {.importc: "struct webview_priv", header: webviewHeader, bycopy.} = object
-        WebviewObj*     {.importc: "struct webview", header: webviewHeader, bycopy.} = object
+        WebviewPrivObj  {.importc: "struct webview_priv", header: "webview_win_old.h", bycopy.} = object
+        WebviewObj*     {.importc: "struct webview", header: "webview_win_old.h", bycopy.} = object
             url*        {.importc: "url".}: cstring
             title*      {.importc: "title".}: cstring
             width*      {.importc: "width".}: cint
@@ -155,6 +155,9 @@ proc newWebview*(title: string, url: string = "", width: int = 640, height: int 
         result.resizable = if constraints==Default: 1 else: 0
         result.invokeCb = nil
         result.debug = debug.cint
+
+        if webview_init(result) != 0: 
+            return nil
 
 proc show*(this: Webview) =
     when not defined(WEBVIEW_NOEDGE):
