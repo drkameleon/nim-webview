@@ -20,6 +20,9 @@ jobs:
       matrix:
         os:
           - windows-latest
+        version:
+          - edge
+          - old
     steps:
       - name: "Cancel similar actions in progress"
         uses: styfle/cancel-workflow-action@0.6.0
@@ -31,15 +34,37 @@ jobs:
         with:
           submodules: recursive
 
-      # - name: "Build Webview"
-      #   run: ./script/build.bat
-
       - uses: msys2/setup-msys2@v2
         with:
           update: true
           install: 'git base-devel'
 
       - name: Install dependencies + Build Library
+        if: matrix.version == 'edge'
+        shell: msys2 {0}
+        run: |
+          pacman --noconfirm -S p7zip
+          mkdir nim
+          curl -L https://nim-lang.org/download/dlls.zip -o dist/dlls.zip
+          curl -L https://nim-lang.org/download/nim-1.6.4_x64.zip -o dist/nim.zip
+          7z x dist/dlls.zip -obin
+          7z x dist/nim.zip -onim
+          
+          echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+          export PATH="${{ github.workspace }}/bin":$PATH
+          export PATH="${{ github.workspace }}/nim/nim-1.6.4/bin":$PATH
+          echo "${{ github.workspace }}/nim/nim-1.6.4/bin" >> $GITHUB_PATH
+          ls -la nim/nim-1.6.4
+          ls -la nim/nim-1.6.4/bin 
+          echo "$GITHUB_PATH"
+          
+          echo "Running nim"
+          nim --version
+
+          nim c --cc:vcc test.nim
+
+      - name: Install dependencies + Build Library
+        if: matrix.version == 'old'
         shell: msys2 {0}
         run: |
           ls "script\microsoft.web.webview2.1.0.664.37\build\native\x64"
@@ -68,10 +93,10 @@ jobs:
           echo "Running nim"
           nim --version
 
-          nim c test.nim
+          nim c -d:WEBVIEW_NOEDGE test.nim
 
       - name: Upload Artifacts
         uses: 'actions/upload-artifact@v2'
         with:
-          name: "nim-webview-${{matrix.os}}"
+          name: "nim-webview-${{matrix.os}}-${{matrix.version}}"
           path: test.exe
