@@ -68,7 +68,7 @@ jobs:
           echo "Running nim"
           nim --version
 
-          nim c --cc:vcc test.nim
+          nim c test.nim
 
       - name: Upload Artifacts
         uses: 'actions/upload-artifact@v2'

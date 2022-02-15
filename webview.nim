@@ -31,9 +31,11 @@ elif defined(macosx):
     {.passC: "-DWEBVIEW_COCOA=1".}
     {.passL: "-framework WebKit".}
 elif defined(windows):
-    {.compile("webview.cc","/std:c++17 /EHsc").}
+   # {.compile("webview.cc","/std:c++17 /EHsc").}
+    {.compile("webview.cc", "-std=c++17")
     {.passC: "-DWEBVIEW_EDGE=1".}
-    {.passL: """/EHsc /std:c++17 "deps\libs\x64\WebView2LoaderStatic.lib" version.lib shell32.lib""".}
+    {.passL: """--lstdc++ -L./deps/libs/x64 -lWebView2LoaderStatic -lversion -lshell32""".}
+    #{.passL: """/EHsc /std:c++17 "deps\libs\x64\WebView2LoaderStatic.lib" version.lib shell32.lib""".}
 
 #=======================================
 # Types
