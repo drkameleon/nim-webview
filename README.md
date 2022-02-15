@@ -1,4 +1,6 @@
 # nim-webview
+![License](https://img.shields.io/github/license/drkameleon/nim-webview?style=for-the-badge) ![Language](https://img.shields.io/badge/language-Nim-6A7FC8.svg?style=for-the-badge)   [![Build Status](https://img.shields.io/github/workflow/status/drkameleon/nim-webview/Linux?style=for-the-badge)](https://github.com/drkameleon/nim-webview/actions)
+
 Nim wrapper for Zaitsev's new [Webview](https://github.com/webview/webview).
 
 The purpose of this repo is to support the new version of the webview and replace: https://github.com/oskca/webview. Plus, make a suitable, drop-in replacement for the obsolete version used for [Arturo](https://github.com/arturo-lang/arturo)'s webview component/library.
