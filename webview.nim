@@ -152,7 +152,7 @@ proc newWebview*(title: string, url: string = "", width: int = 640, height: int 
         result.url = url.cstring
         result.width = width.cint
         result.height = height.cint
-        result.resizable = Constraints.cint
+        result.resizable = if constraints==Default: 1 else: 0
         result.debug = debug.cint
 
 proc show*(this: Webview) =
