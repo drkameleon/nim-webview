@@ -39,7 +39,7 @@ elif defined(windows):
         {.passL: """/EHsc /std:c++17 "deps\libs\x64\WebView2LoaderStatic.lib" version.lib shell32.lib""".}
     else:
         webviewHeader = "webview_win_old.h"
-        {.passC: "-DWEBVIEW_STATIC -DWEBVIEW_IMPLEMENTATION -DWEBVIEW_WINAPI=1".}
+        {.passC: "-DWEBVIEW_STATIC=1 -DWEBVIEW_IMPLEMENTATION=1 -DWEBVIEW_WINAPI=1".}
         {.passL: "-lole32 -lcomctl32 -loleaut32 -luuid -lgdi32".}
 
 #=======================================
@@ -103,7 +103,7 @@ else:
     proc webview_terminate*(w: Webview) {.header: webviewHeader, importc.}
     proc webview_exit*(w: Webview) {.header: webviewHeader, importc.}
     proc webview_debug*(format: cstring) {.header: webviewHeader, importc.}
-    proc webview_print_log*(s: cstring) {.importc: "webview_print_log", header: "webview.h".}
+    proc webview_print_log*(s: cstring) {.header: webviewHeader, importc.}
     proc webview*(title: cstring; url: cstring; w: cint; h: cint; resizable: cint): cint {.header: webviewHeader, importc.}
 
 #=======================================
@@ -153,6 +153,7 @@ proc newWebview*(title: string, url: string = "", width: int = 640, height: int 
         result.width = width.cint
         result.height = height.cint
         result.resizable = if constraints==Default: 1 else: 0
+        result.invokeCb = nil
         result.debug = debug.cint
 
 proc show*(this: Webview) =
