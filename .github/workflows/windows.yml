@@ -41,11 +41,11 @@ jobs:
         run: |
           ./script/build.bat
           pacman --noconfirm -S p7zip
-          pacman --noconfirm -S mingw-w64-x86_64-gcc
-          pacman --noconfirm -S mingw-w64-x86_64-winstorecompat-git
+          #pacman --noconfirm -S mingw-w64-x86_64-gcc
+          #pacman --noconfirm -S mingw-w64-x86_64-winstorecompat-git
           mkdir dist
           mkdir nim
-          curl -L https://nim-lang.org/download/mingw64.zip -o dist/mingw64.zip
+          #curl -L https://nim-lang.org/download/mingw64.zip -o dist/mingw64.zip
           curl -L https://nim-lang.org/download/dlls.zip -o dist/dlls.zip
           curl -L https://nim-lang.org/download/nim-1.6.4_x64.zip -o dist/nim.zip
           7z x dist/mingw64.zip -odist
