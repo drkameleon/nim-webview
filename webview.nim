@@ -97,7 +97,7 @@ else:
     proc webview_set_title*(w: Webview; title: cstring) {.header: webviewHeader, importc.}
     proc webview_set_color*(w: Webview; r,g,b,a: uint8) {.header: webviewHeader, importc.}
     proc webview_set_fullscreen*(w: Webview; fullscreen: cint) {.header: webviewHeader, importc.}
-    proc webview_dialog*(w: Webview; dlgtype: DialogType; flags: cint; title: cstring; arg: cstring; result: cstring; resultsz: csize_t) {.header: webviewHeader, importc.}
+    #proc webview_dialog*(w: Webview; dlgtype: DialogType; flags: cint; title: cstring; arg: cstring; result: cstring; resultsz: csize_t) {.header: webviewHeader, importc.}
     #proc dispatch(w: Webview; fn: pointer; arg: pointer) {.importc: "webview_dispatch", header: "webview.h".}
     proc webview_terminate*(w: Webview) {.header: webviewHeader, importc.}
     proc webview_exit*(w: Webview) {.header: webviewHeader, importc.}
