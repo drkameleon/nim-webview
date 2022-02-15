@@ -160,7 +160,7 @@ proc show*(this: Webview) =
         this.run()
         this.destroy()
     else:
-        while webview_loop(this) == 0:
+        while webview_loop(this, 1) == 0:
             discard
         this.destroy()
 
