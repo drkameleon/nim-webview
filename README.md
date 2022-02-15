@@ -5,7 +5,7 @@ The purpose of this repo is to support the new version of the webview and replac
 
 ## Example
 
-To get an idea of how simply it to use, have a look at our *test.nim*:
+To get an idea of how simple it to use, have a look at our *test.nim*:
 
 
 ```nim
