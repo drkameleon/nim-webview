@@ -46,8 +46,8 @@ jobs:
           ls "C:/Program Files (x86)/Windows Kits/10/Include/10.0.20348.0"
           ls "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC"
           pacman --noconfirm -S p7zip
-          #pacman --noconfirm -S mingw-w64-x86_64-gcc
-          #pacman --noconfirm -S mingw-w64-x86_64-winstorecompat-git
+          pacman --noconfirm -S mingw-w64-x86_64-gcc
+          pacman --noconfirm -S mingw-w64-x86_64-winstorecompat-git
           mkdir dist
           mkdir nim
           #curl -L https://nim-lang.org/download/mingw64.zip -o dist/mingw64.zip
