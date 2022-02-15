@@ -3,7 +3,9 @@ Nim wrapper for Zaitsev's new [Webview](https://github.com/webview/webview).
 
 The purpose of this repo is to support the new version of the webview and replace: https://github.com/oskca/webview
 
-Ah, and make a suitable, drop-in replacement for the obsolete version used for [Arturo](https://github.com/arturo-lang/arturo)'s webview component/library.
+Plus, make a suitable, drop-in replacement for the obsolete version used for [Arturo](https://github.com/arturo-lang/arturo)'s webview component/library.
+
+Ah, I forgot: and all of this without any dependencies or accompanying DLLs whatsoever. You just compile and ship.
 
 ## Example
 
