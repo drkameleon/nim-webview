@@ -168,4 +168,7 @@ proc changeTitle*(this: Webview, title: string) =
     webview_set_title(this, title=title.cstring)
 
 proc evaluate*(this: Webview, js: string) =
-    webview_eval(this, js.cstring)
+    when not defined(WEBVIEW_NOEDGE):
+        webview_eval(this, js.cstring)
+    else:
+        discard webview_eval(this, js.cstring)
