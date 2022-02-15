@@ -33,7 +33,7 @@ elif defined(macosx):
 elif defined(windows):
     {.compile("webview.cc","/std:c++17").}
     {.passC: "-DWEBVIEW_EDGE=1".}
-    {.passL: "-mwindows -L./dll/x64 -lwebview -lWebView2Loader".}
+    {.passL: "-mwindows dll/x64/lwebview dll/x64/WebView2Loader".}
 
 #=======================================
 # Types
