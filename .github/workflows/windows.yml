@@ -48,7 +48,7 @@ jobs:
           #curl -L https://nim-lang.org/download/mingw64.zip -o dist/mingw64.zip
           curl -L https://nim-lang.org/download/dlls.zip -o dist/dlls.zip
           curl -L https://nim-lang.org/download/nim-1.6.4_x64.zip -o dist/nim.zip
-          7z x dist/mingw64.zip -odist
+          #7z x dist/mingw64.zip -odist
           7z x dist/dlls.zip -obin
           7z x dist/nim.zip -onim
           
