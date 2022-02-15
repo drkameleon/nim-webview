@@ -25,7 +25,7 @@ To build all you have to do is:
 nim c test.nim
 ```
 
-> 💡 **For Windows:** (aka the elephant in the room) if you're building with MinGW, it would be a better idea to build with `nim c -d:WEBVIEW_NOEDGE test.nim` (but this means that you will be left without all the fancy additions of the newer, Edge-powered version of the Webview library). If you have VCC installed and feel adventurous enough, go with `nim c --cc:vcc test.nim` and pray that it'll work. If you want to have a look how I've managed to make it compile on Windows, have a look at the CI workflow here: https://github.com/drkameleon/nim-webview/blob/main/.github/workflows/windows.yml#L42-L65)
+> 💡 **For Windows:** (aka the elephant in the room) if you're building with MinGW, it would be a better idea to build with `nim c -d:WEBVIEW_NOEDGE test.nim` (but this means that you will be left without all the fancy additions of the newer, Edge-powered version of the Webview library). If you have VCC installed and feel adventurous enough, go with `nim c --cc:vcc test.nim` and pray that it'll work. 🤞 If you want to have a look how I've managed to make it compile on Windows (no big fuss, it took me roughly 1024 tries), have a look at the CI workflow here: https://github.com/drkameleon/nim-webview/blob/main/.github/workflows/windows.yml#L42-L65)
 
 ## License
 
