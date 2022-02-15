@@ -67,9 +67,6 @@ jobs:
         if: matrix.version == 'old'
         shell: msys2 {0}
         run: |
-          ls "script\microsoft.web.webview2.1.0.664.37\build\native\x64"
-          ls "C:/Program Files (x86)/Windows Kits/10/Include/10.0.20348.0"
-          ls "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC"
           pacman --noconfirm -S p7zip
           pacman --noconfirm -S mingw-w64-x86_64-gcc
           pacman --noconfirm -S mingw-w64-x86_64-winstorecompat-git
