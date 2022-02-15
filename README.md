@@ -27,7 +27,7 @@ wt.show()
 
 ## Building
 
-To build all you have to do is:
+To build the test app, all you have to do is:
 
 ```bash
 nim c test.nim
