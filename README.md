@@ -5,6 +5,12 @@ The purpose of this repo is to support the new version of the webview and replac
 
 Ah, I forgot: and all of this without any dependencies or accompanying DLLs whatsoever. You just compile and ship.
 
+## Tested on
+
+- Linux (Ubuntu)
+- MacOS
+- Windows 10+
+
 ## Example
 
 To get an idea of how simple it to use, have a look at our *test.nim*:
