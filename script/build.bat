@@ -1,3 +1,14 @@
+@echo off
+
+echo Prepare directories...
+set script_dir=%~dp0
+set src_dir=%script_dir%..
+set build_dir=%script_dir%..\build
+mkdir "%build_dir%"
+
+echo Webview directory: %src_dir%
+echo Build directory: %build_dir%
+
 echo Looking for vswhere.exe...
 set "vswhere=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
 if not exist "%vswhere%" set "vswhere=%ProgramFiles%\Microsoft Visual Studio\Installer\vswhere.exe"
@@ -17,7 +28,7 @@ if not exist "%vc_dir%\Common7\Tools\vsdevcmd.bat" (
 )
 echo Found %vc_dir%
 
-call "%vc_dir%\Common7\Tools\vsdevcmd.bat" -arch=x86 -host_arch=x64 
+call "%vc_dir%\Common7\Tools\vsdevcmd.bat" -arch=x86 -host_arch=x64
 
 echo Building webview.dll (x86)
 mkdir "%src_dir%\dll\x86"
