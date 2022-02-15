@@ -18,6 +18,3 @@ if not exist "%vc_dir%\Common7\Tools\vsdevcmd.bat" (
 echo Found %vc_dir%
 
 call "%vc_dir%\Common7\Tools\vsdevcmd.bat" -arch=x86 -host_arch=x64 
-
-dir C:\Program Files (x86)\Windows Kits\10\Include\*
-dir C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\*
