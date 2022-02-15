@@ -40,8 +40,8 @@ jobs:
         shell: msys2 {0}
         run: |
           ./script/build.bat
-          ls "/Program Files (x86)/Windows Kits/10/Include"
-          ls "/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC"
+          ls "C:/Program Files (x86)/Windows Kits/10/Include"
+          ls "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC"
           pacman --noconfirm -S p7zip
           pacman --noconfirm -S mingw-w64-x86_64-gcc
           pacman --noconfirm -S mingw-w64-x86_64-winstorecompat-git
