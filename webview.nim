@@ -46,16 +46,17 @@ elif defined(windows):
 # Types
 #=======================================
 
+type
+    Constraints* = enum
+        Default = 0
+        Minimum = 1
+        Maximum = 2
+        Fixed = 3
+
 when not defined(WEBVIEW_NOEDGE):
     static: echo "Compiling with: " & webviewHeader
     type
         Webview* {.header: webviewHeader, importc: "webview_t".} = pointer
-
-        Constraints* = enum
-            Default = 0
-            Minimum = 1
-            Maximum = 2
-            Fixed = 3
 else:
     type
         WebviewPrivObj  {.importc: "struct webview_priv", header: webviewHeader, bycopy.} = object
