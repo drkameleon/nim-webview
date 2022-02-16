@@ -95,8 +95,8 @@ when not defined(WEBVIEW_NOEDGE):
         ## Stops the main loop. It is safe to call this function from another other
         ## background thread.
     # webview_dispatch not implemented yet
-        ## Posts a function to be executed on the main thread. You normally do not need
-        ## to call this function, unless you want to tweak the native window.
+    ## Posts a function to be executed on the main thread. You normally do not need
+    ## to call this function, unless you want to tweak the native window.
     proc webview_get_window(w: Webview): pointer {.importc.}
         ## Returns a native window handle pointer. When using GTK backend the pointer
         ## is GtkWindow pointer, when using Cocoa backend the pointer is NSWindow
@@ -117,16 +117,16 @@ when not defined(WEBVIEW_NOEDGE):
         ## the result of the expression is ignored. Use RPC bindings if you want to
         ## receive notifications about the results of the evaluation.
     # webview_bind not implemented yet
-        ## Binds a native C callback so that it will appear under the given name as a
-        ## global JavaScript function. Internally it uses webview_init(). Callback
-        ## receives a request string and a user-provided argument pointer. Request
-        ## string is a JSON array of all the arguments passed to the JavaScript
-        ## function.
+    ## Binds a native C callback so that it will appear under the given name as a
+    ## global JavaScript function. Internally it uses webview_init(). Callback
+    ## receives a request string and a user-provided argument pointer. Request
+    ## string is a JSON array of all the arguments passed to the JavaScript
+    ## function.
     # webview_return not implemented yet
-        ## Allows to return a value from the native binding. Original request pointer
-        ## must be provided to help internal RPC engine match requests with responses.
-        ## If status is zero - result is expected to be a valid JSON result value.
-        ## If status is not zero - result is an error JSON object.
+    ## Allows to return a value from the native binding. Original request pointer
+    ## must be provided to help internal RPC engine match requests with responses.
+    ## If status is zero - result is expected to be a valid JSON result value.
+    ## If status is not zero - result is an error JSON object.
 else:
     proc webview_init*(w: Webview): cint {.importc.}
     proc webview_loop*(w: Webview; blocking: cint): cint {.importc.}
