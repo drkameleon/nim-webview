@@ -10,10 +10,16 @@
 ######################################################
 
 #=======================================
+# Libraries
+#=======================================
+
+import os
+
+#=======================================
 # Compilation & Linking
 #=======================================
 
-{.passC: "-I" & currentSourcePath().substr(0, high(currentSourcePath()) - 4) .}
+{.passC: "-I" & parentDir(currentSourcePath()) .}
 
 when defined(linux):
     {.compile("webview.cc","-std=c++11").}
