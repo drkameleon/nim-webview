@@ -13,7 +13,6 @@
 # Compilation & Linking
 #=======================================
 
-var webviewHeader {.compileTime.} = "webview.h"
 {.passC: "-I" & currentSourcePath().substr(0, high(currentSourcePath()) - 4) .}
 
 when defined(linux):
@@ -38,9 +37,13 @@ elif defined(windows):
         {.passC: "-DWEBVIEW_EDGE=1".}
         {.passL: """/EHsc /std:c++17 "deps\libs\x64\WebView2LoaderStatic.lib" version.lib shell32.lib""".}
     else:
-        webviewHeader = "webview_win_old.h"
         {.passC: "-DWEBVIEW_STATIC=1 -DWEBVIEW_IMPLEMENTATION=1 -DWEBVIEW_WINAPI=1".}
         {.passL: "-lole32 -lcomctl32 -loleaut32 -luuid -lgdi32".}
+
+when defined(windows) and defined(WEBVIEW_NOEDGE):
+    {.push header: "webview_win_old.h", cdecl.}
+else:
+    {.push header: "webview.h", cdecl.}
 
 #=======================================
 # Types
@@ -54,13 +57,12 @@ type
         Fixed = 3
 
 when not defined(WEBVIEW_NOEDGE):
-    static: echo "Compiling with: " & webviewHeader
     type
-        Webview* {.header: webviewHeader, importc: "webview_t".} = pointer
+        Webview* {.importc: "webview_t".} = pointer
 else:
     type
-        WebviewPrivObj  {.importc: "struct webview_priv", header: "webview_win_old.h", bycopy.} = object
-        WebviewObj*     {.importc: "struct webview", header: "webview_win_old.h", bycopy.} = object
+        WebviewPrivObj  {.importc: "struct webview_priv", bycopy.} = object
+        WebviewObj*     {.importc: "struct webview", bycopy.} = object
             url*        {.importc: "url".}: cstring
             title*      {.importc: "title".}: cstring
             width*      {.importc: "width".}: cint
@@ -77,34 +79,36 @@ else:
 #=======================================
 
 when not defined(WEBVIEW_NOEDGE):
-    proc webview_create(debug: cint = 0, window: pointer = nil): Webview {.header: webviewHeader, importc.}
-    proc webview_destroy(w: Webview) {.header: webviewHeader, importc.}
-    proc webview_run(w: Webview) {.header: webviewHeader, importc.}
-    proc webview_terminate(w: Webview) {.header: webviewHeader, importc.}
+    proc webview_create(debug: cint = 0, window: pointer = nil): Webview {.importc.}
+    proc webview_destroy(w: Webview) {.importc.}
+    proc webview_run(w: Webview) {.importc.}
+    proc webview_terminate(w: Webview) {.importc.}
     # webview_dispatch not implemented yet
-    proc webview_get_window(w: Webview): pointer {.header: webviewHeader, importc.}
-    proc webview_set_title(w: Webview, title: cstring) {.header: webviewHeader, importc.}
-    proc webview_set_size(w: Webview, width: cint, height: cint, constraints: Constraints) {.header: webviewHeader, importc.}
-    proc webview_navigate(w: Webview, url: cstring) {.header: webviewHeader, importc.}
-    proc webview_init(w: Webview, js: cstring) {.header: webviewHeader, importc.}
-    proc webview_eval(w: Webview, js: cstring) {.header: webviewHeader, importc.}
+    proc webview_get_window(w: Webview): pointer {.importc.}
+    proc webview_set_title(w: Webview, title: cstring) {.importc.}
+    proc webview_set_size(w: Webview, width: cint, height: cint, constraints: Constraints) {.importc.}
+    proc webview_navigate(w: Webview, url: cstring) {.importc.}
+    proc webview_init(w: Webview, js: cstring) {.importc.}
+    proc webview_eval(w: Webview, js: cstring) {.importc.}
     # webview_bind not implemented yet
     # webview_return not implemented yet
 else:
-    proc webview_init*(w: Webview): cint {.header: webviewHeader, importc.}
-    proc webview_loop*(w: Webview; blocking: cint): cint {.header: webviewHeader, importc.}
-    proc webview_eval*(w: Webview; js: cstring): cint {.header: webviewHeader, importc.}
-    proc webview_inject_css*(w: Webview; css: cstring): cint {.header: webviewHeader, importc.}
-    proc webview_set_title*(w: Webview; title: cstring) {.header: webviewHeader, importc.}
-    proc webview_set_color*(w: Webview; r,g,b,a: uint8) {.header: webviewHeader, importc.}
-    proc webview_set_fullscreen*(w: Webview; fullscreen: cint) {.header: webviewHeader, importc.}
-    #proc webview_dialog*(w: Webview; dlgtype: DialogType; flags: cint; title: cstring; arg: cstring; result: cstring; resultsz: csize_t) {.header: webviewHeader, importc.}
+    proc webview_init*(w: Webview): cint {.importc.}
+    proc webview_loop*(w: Webview; blocking: cint): cint {.importc.}
+    proc webview_eval*(w: Webview; js: cstring): cint {.importc.}
+    proc webview_inject_css*(w: Webview; css: cstring): cint {.importc.}
+    proc webview_set_title*(w: Webview; title: cstring) {.importc.}
+    proc webview_set_color*(w: Webview; r,g,b,a: uint8) {.importc.}
+    proc webview_set_fullscreen*(w: Webview; fullscreen: cint) {.importc.}
+    #proc webview_dialog*(w: Webview; dlgtype: DialogType; flags: cint; title: cstring; arg: cstring; result: cstring; resultsz: csize_t) {.importc.}
     #proc dispatch(w: Webview; fn: pointer; arg: pointer) {.importc: "webview_dispatch", header: "webview.h".}
-    proc webview_terminate*(w: Webview) {.header: webviewHeader, importc.}
-    proc webview_exit*(w: Webview) {.header: webviewHeader, importc.}
-    proc webview_debug*(format: cstring) {.header: webviewHeader, importc.}
-    proc webview_print_log*(s: cstring) {.header: webviewHeader, importc.}
-    proc webview*(title: cstring; url: cstring; w: cint; h: cint; resizable: cint): cint {.header: webviewHeader, importc.}
+    proc webview_terminate*(w: Webview) {.importc.}
+    proc webview_exit*(w: Webview) {.importc.}
+    proc webview_debug*(format: cstring) {.importc.}
+    proc webview_print_log*(s: cstring) {.importc.}
+    proc webview*(title: cstring; url: cstring; w: cint; h: cint; resizable: cint): cint {.importc.}
+
+{.pop.}
 
 #=======================================
 # Wrappers
