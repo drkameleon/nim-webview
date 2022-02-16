@@ -99,7 +99,6 @@ when not defined(WEBVIEW_NOEDGE):
     proc webview_terminate(w: Webview) {.importc.}
         ## Stops the main loop. It is safe to call this function from another other
         ## background thread.
-        ## 
 
     proc webview_dispatch(w: Webview, fn: WebviewDispatch, arg: pointer) {.importc.}
         ## Posts a function to be executed on the main thread. You normally do not need
@@ -226,7 +225,7 @@ proc show*(this: Webview) =
 proc changeTitle*(this: Webview, title: string) =
     webview_set_title(this, title=title.cstring)
 
-proc evaluate*(this: Webview, js: string) =
+proc execute*(this: Webview, js: string) =
     when not defined(WEBVIEW_NOEDGE):
         webview_eval(this, js.cstring)
     else:
